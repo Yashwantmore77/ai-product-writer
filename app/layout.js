@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import AuthProvider from "./components/AuthProvider";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
           </div>
           {children}
         </AuthProvider>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>

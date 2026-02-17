@@ -115,16 +115,16 @@ export default function GeneratePage() {
   const router = useRouter();
 
   // Redirect to auth page when not logged in
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth');
-    }
-  }, [user, router]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     router.push('/auth');
+  //   }
+  // }, [user, router]);
 
-  if (!user) {
-    // Render nothing while redirecting
-    return null;
-  }
+  // if (!user) {
+  //   // Render nothing while redirecting
+  //   return null;
+  // }
 
   // templates feature removed — no client-side template loading
 

@@ -95,8 +95,8 @@ export default function AuthProvider({ children }) {
     <AuthContext.Provider value={{ user, token, signup, login, logout, open }}>
       {children}
 
-      {/* Floating auth button (navigates to /auth) */}
-      <div className="fixed top-4 right-4 z-50">
+      {/* Floating auth button (navigates to /auth) - COMMENTED OUT */}
+      {/* <div className="fixed top-4 right-4 z-50">
         <div className="flex items-center gap-2">
           {user ? (
             <div className="inline-flex items-center gap-2 bg-white/5 px-3 py-2 rounded-full text-sm text-white">
@@ -107,7 +107,7 @@ export default function AuthProvider({ children }) {
             <button onClick={open} className="px-3 py-2 rounded-full bg-emerald-500 text-white text-sm">Login / Signup</button>
           )}
         </div>
-      </div>
+      </div> */}
     </AuthContext.Provider>
   );
 }

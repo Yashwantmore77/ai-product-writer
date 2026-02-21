@@ -1,73 +1,168 @@
 "use client";
-import Link from 'next/link'
+
+import Link from "next/link";
+import { useAuth } from "./components/AuthProvider";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/generate");
+    }
+  }, [user, router]);
+
   return (
-    <div className="min-h-screen">
-      <header className="bg-gradient-to-b from-transparent to-white/2 border-b border-white/6">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-500 to-indigo-600 flex items-center justify-center shadow-xl">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5" /></svg>
-            </div>
-            <div>
-              <div className="text-lg font-semibold">AI Product Writer</div>
-              <div className="text-xs text-slate-400">E-commerce copy in seconds</div>
-            </div>
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-2xl">
+        {/* Logo Section */}
+        <div className="text-center mb-16">
+          <div className="inline-flex mb-6">
+            <Link href="/" className="group">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl glow-effect animate-pulse">
+                <svg
+                  className="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+            </Link>
           </div>
-          <nav className="flex items-center gap-3">
-            <Link href="/generate" className="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg text-white font-medium shadow">Generate</Link>
-            <a href="/api/metrics" className="text-sm text-slate-400 hover:underline">Dev Metrics</a>
-          </nav>
+          <h1 className="text-5xl font-bold gradient-title mb-4">DescribeAI</h1>
+          <p className="text-xl text-gray-300 mb-2">
+            Generate Compelling Product Descriptions
+          </p>
+          <p className="text-gray-400">
+            AI-powered descriptions for Amazon, eBay, and Shopify in seconds
+          </p>
         </div>
-      </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-12 gap-12 items-center">
-        <section className="lg:col-span-7">
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">Write product descriptions that actually sell — in seconds.</h1>
-          <p className="mt-4 text-slate-300 max-w-2xl">AI Product Writer creates polished, platform-ready product descriptions tailored for Shopify, Etsy, Amazon, and more. Upload product photos or let the AI adapt to your tone.</p>
+        {/* Main CTA */}
+        <div className="text-center mb-12">
+          <Link href="/auth" className="inline-flex items-center gap-2 gradient-button text-lg">
+            <span>Get Started Free</span>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </Link>
+        </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/generate" className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-rose-500 via-purple-600 to-indigo-500 text-white font-semibold shadow-lg">Get Started</Link>
-            <button onClick={() => window.location.href = '/generate'} className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 text-white text-sm">View Features</button>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-4 mb-12">
+          <div className="glass-card p-6">
+            <div className="w-12 h-12 rounded-lg bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mb-4">
+              <span className="text-2xl">🏪</span>
+            </div>
+            <h3 className="text-white font-semibold mb-2">Multi-Platform</h3>
+            <p className="text-gray-400 text-sm">
+              Generate descriptions tailored for Amazon, eBay, and Shopify formats
+            </p>
           </div>
 
-          <div className="mt-10 grid sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl bg-white/3 border border-white/6">
-              <h3 className="font-semibold">Speed</h3>
-              <p className="text-sm text-slate-300 mt-1">Generate polished descriptions quickly for faster product launches.</p>
+          <div className="glass-card p-6">
+            <div className="w-12 h-12 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center mb-4">
+              <span className="text-2xl">⚡</span>
             </div>
-            <div className="p-4 rounded-xl bg-white/3 border border-white/6">
-              <h3 className="font-semibold">Image-based</h3>
-              <p className="text-sm text-slate-300 mt-1">Upload a photo and get targeted descriptions without typing.</p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/3 border border-white/6">
-              <h3 className="font-semibold">Export Ready</h3>
-              <p className="text-sm text-slate-300 mt-1">Download as TXT, CSV, or Shopify A/B CSV for uploads.</p>
-            </div>
+            <h3 className="text-white font-semibold mb-2">Lightning Fast</h3>
+            <p className="text-gray-400 text-sm">
+              Get professional descriptions in under 10 seconds
+            </p>
           </div>
-        </section>
 
-        <aside className="lg:col-span-5">
-          <div className="rounded-3xl bg-gradient-to-b from-white/4 to-white/2 p-6 border border-white/8 shadow-2xl">
-            <h3 className="text-lg font-semibold">Quick Demo</h3>
-            <p className="text-sm text-slate-300 mt-2">Try a quick example or jump to the form to generate your first description.</p>
-            <div className="mt-4">
-              <img src="/generate-screenshot.png" alt="demo" className="w-full rounded-md border border-white/6 object-cover" />
+          <div className="glass-card p-6">
+            <div className="w-12 h-12 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-4">
+              <span className="text-2xl">✍️</span>
             </div>
-            <div className="mt-4 flex gap-2">
-              <Link href="/generate" className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-sm text-center">Open Generator</Link>
-              <a href="#features" className="px-4 py-2 rounded-lg bg-white/5 text-white text-sm">Learn more</a>
-            </div>
+            <h3 className="text-white font-semibold mb-2">Tone Control</h3>
+            <p className="text-gray-400 text-sm">
+              Choose from Professional, Casual, Luxury, or Fun tones
+            </p>
           </div>
-          <div className="mt-6 text-xs text-slate-400">Built for sellers — optimized for conversions.</div>
-        </aside>
-      </main>
+        </div>
 
-      <footer className="border-t border-white/6">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-slate-400 text-sm">© {new Date().getFullYear()} AI Product Writer — Designed for e-commerce creators</div>
-      </footer>
+        {/* Free Plan Message */}
+        <div className="glass-card p-8 mb-12 text-center">
+          <h3 className="text-2xl text-white font-bold mb-3">This app is free to use</h3>
+          <p className="text-gray-400 mb-4">All features are available at no cost.</p>
+          <div className="max-w-xl mx-auto">
+            <ul className="grid md:grid-cols-2 gap-3 text-sm text-gray-300">
+              <li className="flex items-center gap-3">
+                <span className="text-green-400">✓</span>
+                All platforms: Amazon, eBay & Shopify
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-green-400">✓</span>
+                All tones: Professional, Casual, Luxury, Fun
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-green-400">✓</span>
+                Generated quickly — under 10 seconds
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-green-400">✓</span>
+                Unlimited generations
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Social Proof */}
+        <div className="glass-card p-6 text-center mb-8">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="text-2xl">🛍️</span>
+          </div>
+          <p className="text-white font-semibold">Join 1,200+ online sellers using DescribeAI</p>
+          <p className="text-gray-400 text-sm mt-1">50,000+ product descriptions generated</p>
+        </div>
+
+        {/* Footer CTA */}
+        <div className="text-center">
+          <Link
+            href="/auth"
+            className="inline-flex items-center gap-2 gradient-button"
+          >
+            <span>Start Generating Now</span>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </Link>
+          <p className="text-gray-500 text-sm mt-4">
+            No credit card required • Free to get started
+          </p>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
